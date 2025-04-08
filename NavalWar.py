@@ -7,7 +7,12 @@ for fila in range(tamaño):
         columna.append(False)
     tablero.append(columna)
     print(tablero[fila])
-
+#tablero dibujado
+for y in range(tablero):
+    for x in range(tablero[y]):
+        dibujo:list=[]
+        dibujo.append("🌊")
+    print(dibujo)
 
 
 

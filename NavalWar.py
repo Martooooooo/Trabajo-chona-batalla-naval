@@ -9,12 +9,11 @@ for fila in range(tamaño):
     tablero.append(columna)
     print(tablero[fila])
 #tablero dibujado
-for y in range(tablero):
-    for x in range(tablero[y]):
-        dibujo:list=[]
-        dibujo.append("🌊")
+for y in range(len(tablero)):
+    dibujo: list = []
+    for x in range(len(tablero[y])):
+            dibujo.append("🌊")
     print(dibujo)
-
 
 
 

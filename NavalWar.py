@@ -1,3 +1,4 @@
+import random 
 #creacion de tablero
 tablero : list =[];
 tamaño : int=int(input("Cual va a ser el ancho y largo del tablero?"));

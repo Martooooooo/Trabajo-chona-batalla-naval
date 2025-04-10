@@ -7,7 +7,6 @@ for fila in range(tamaño):
     for i in range(tamaño):
         columna.append(False)
     tablero.append(columna)
-    print(tablero[fila])
 #tablero dibujado
 for y in range(len(tablero)):
     dibujo: list = []
@@ -54,3 +53,23 @@ def barcosRandom():
 
 
 #juego
+cantidadTurnos:int=int(input("Con cuantos turnos vas a jugar?"))
+turnoActual:int=0
+for t in range(cantidadTurnos):
+    #chequea si ganaste
+    todo_falso=True
+    for y in range(len(tablero)):
+        for x in range(tablero[y]):
+            #si algo de la lista es true sale de los for y seguis 
+            #pero si termina y todofalso sigue siendo true ganaste
+            if(tablero[y][x]!=False):
+                todo_falso=False
+                break
+        if not todo_falso:
+            break
+    if todo_falso:
+        print("Ganaste!!")
+        break
+    else:
+
+    

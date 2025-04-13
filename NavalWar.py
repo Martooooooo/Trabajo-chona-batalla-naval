@@ -1,23 +1,23 @@
 import random 
 #creacion de tablero
-tablero : list =[];
-tamaño : int=int(input("Cual va a ser el ancho y largo del tablero?"));
+tablero : list =[]
+tamaño : int=int(input("Cual va a ser el ancho y largo del tablero?"))
+dibujo : list=[]
 for fila in range(tamaño):
     columna:list=[]
     for i in range(tamaño):
         columna.append(False)
     tablero.append(columna)
-#tablero dibujado
-for y in range(len(tablero)):
-    dibujo: list = []
-    for x in range(len(tablero[y])):
-            dibujo.append("🌊")
-    print(dibujo)
-
-
-
-
-
+#crear tablero dibujado
+for y in range(tamaño):
+    dibujofila: list = []
+    for x in range(tamaño):
+            dibujofila.append("🌊")
+    dibujo.append(dibujofila)
+#dibujar tablero
+def dibujarTablero():
+    for F in range(tamaño):
+        print(dibujo[F])      
 
 
 
@@ -54,22 +54,32 @@ def barcosRandom():
 
 #juego
 cantidadTurnos:int=int(input("Con cuantos turnos vas a jugar?"))
-turnoActual:int=0
-for t in range(cantidadTurnos):
-    #chequea si ganaste
-    todo_falso=True
-    for y in range(len(tablero)):
-        for x in range(tablero[y]):
-            #si algo de la lista es true sale de los for y seguis 
-            #pero si termina y todofalso sigue siendo true ganaste
-            if(tablero[y][x]!=False):
+listaDeTurnos:list=[]
+todo_falso:bool=True
+for t in range(len(cantidadTurnos)):
+    for y in range(tamaño):                               #chequea si ganaste
+        for x in range(tamaño):
+            if(tablero[y][x]):                           #si algo de la lista es true sale de los for y seguis
                 todo_falso=False
                 break
         if not todo_falso:
             break
-    if todo_falso:
+    if todo_falso:                                              #pero si termina y todofalso sigue siendo true ganaste
         print("Ganaste!!")
         break
     else:
-
-    
+        Y:int=int(input("Ingrese cordenada y del disparo"))
+        X:int=int(input("Ingrese cordenada x del disparo"))
+        codTurno:int=(Y*10)+X
+        if(any(codTurno == turno for turno in listaDeTurnos)):  #si ese turno ya lo hiciste
+            print("Ya jugaste este turno")
+            continue                                            #continue lo que hace es que pasa a la siguiente vuelta del for eb el que esta ignorando el codigo de abajo
+        if(tablero[Y][X]):
+            print("Inpacto!!")
+            tablero[Y][X]=False
+            dibujo[Y][X]="💥"
+        else:
+            print("Agua")
+            dibujo[Y][X]="💧"
+        listaDeTurnos.append(codTurno)
+        dibujarTablero()

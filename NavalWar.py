@@ -1,7 +1,17 @@
 import random 
 #creacion de tablero
 tablero : list =[]
-tamaño : int=int(input("Cual va a ser el ancho y largo del tablero?"))
+tamaño : int
+def preguntarTamaño():
+    try:
+        tamaño=int(input("Cual va a ser el ancho y largo del tablero?"))
+    except ValueError:
+        print("Error:Ingrese un número")
+        preguntarTamaño()
+    if not (0 < tamaño < 100):
+        print("Error: Ingrese un número entre 0 y 100")
+        preguntarTamaño()
+preguntarTamaño()
 dibujo : list=[]
 for fila in range(tamaño):
     columna:list=[]
@@ -55,8 +65,9 @@ def barcosRandom():
 #juego
 cantidadTurnos:int=int(input("Con cuantos turnos vas a jugar?"))
 listaDeTurnos:list=[]
+turnosJugados=0
 todo_falso:bool=True
-for t in range(len(cantidadTurnos)):
+while turnosJugados < cantidadTurnos:
     for y in range(tamaño):                               #chequea si ganaste
         for x in range(tamaño):
             if(tablero[y][x]):                           #si algo de la lista es true sale de los for y seguis
@@ -68,18 +79,26 @@ for t in range(len(cantidadTurnos)):
         print("Ganaste!!")
         break
     else:
-        Y:int=int(input("Ingrese cordenada y del disparo"))
-        X:int=int(input("Ingrese cordenada x del disparo"))
+        try:
+            Y:int=int(input("Ingrese cordenada y del disparo"))
+            X:int=int(input("Ingrese cordenada x del disparo"))
+        except ValueError:                                      #por si poner una palabra o cualquier otra cosa que no sea un numero
+            print("Error: Solo puedes ingresar números.")
+            continue
+        if not (0 <= Y < tamaño) or not (0 <= X < tamaño):      #por si le pifias al tablero
+            print("Coordenada fuera del tablero. Intenta otra vez.")
+            continue
         codTurno:int=(Y*10)+X
         if(any(codTurno == turno for turno in listaDeTurnos)):  #si ese turno ya lo hiciste
             print("Ya jugaste este turno")
             continue                                            #continue lo que hace es que pasa a la siguiente vuelta del for eb el que esta ignorando el codigo de abajo
-        if(tablero[Y][X]):
+        if(tablero[Y][X]):                                      #si la coordenada que pusiste es true es un golpe
             print("Inpacto!!")
             tablero[Y][X]=False
             dibujo[Y][X]="💥"
-        else:
+        else:                                                   #si no es agua
             print("Agua")
             dibujo[Y][X]="💧"
         listaDeTurnos.append(codTurno)
         dibujarTablero()
+        turnosJugados +=1                                       #solo si llega hasta aca abajo te cuenta el turno, si sale antes por un continue es como repetir ese turno

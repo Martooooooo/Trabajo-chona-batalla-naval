@@ -1,32 +1,35 @@
 import random 
 #creacion de tablero
 tablero : list =[]
-tamaño : int
-def preguntarTamaño():
+def preguntarTamanio():
     try:
-        tamaño=int(input("Cual va a ser el ancho y largo del tablero?"))
+        tam: int =  int(input("Cual va a ser el ancho y largo del tablero?"))
+        if not (0 < tam < 100):
+            print("Error: Ingrese un número entre 0 y 100")
+            return preguntarTamanio()
+        return tam
     except ValueError:
         print("Error:Ingrese un número")
-        preguntarTamaño()
-    if not (0 < tamaño < 100):
-        print("Error: Ingrese un número entre 0 y 100")
-        preguntarTamaño()
-preguntarTamaño()
+
+        return preguntarTamanio()
+
+tamanio : int = preguntarTamanio()
+
 dibujo : list=[]
-for fila in range(tamaño):
+for fila in range(tamanio):
     columna:list=[]
-    for i in range(tamaño):
+    for i in range(tamanio):
         columna.append(False)
     tablero.append(columna)
 #crear tablero dibujado
-for y in range(tamaño):
+for y in range(tamanio):
     dibujofila: list = []
-    for x in range(tamaño):
+    for x in range(tamanio):
             dibujofila.append("🌊")
     dibujo.append(dibujofila)
 #dibujar tablero
 def dibujarTablero():
-    for F in range(tamaño):
+    for F in range(tamanio):
         print(dibujo[F])      
 
 
@@ -68,8 +71,8 @@ listaDeTurnos:list=[]
 turnosJugados=0
 todo_falso:bool=True
 while turnosJugados < cantidadTurnos:
-    for y in range(tamaño):                               #chequea si ganaste
-        for x in range(tamaño):
+    for y in range(tamanio):                               #chequea si ganaste
+        for x in range(tamanio):
             if(tablero[y][x]):                           #si algo de la lista es true sale de los for y seguis
                 todo_falso=False
                 break
@@ -85,7 +88,7 @@ while turnosJugados < cantidadTurnos:
         except ValueError:                                      #por si poner una palabra o cualquier otra cosa que no sea un numero
             print("Error: Solo puedes ingresar números.")
             continue
-        if not (0 <= Y < tamaño) or not (0 <= X < tamaño):      #por si le pifias al tablero
+        if not (0 <= Y < tamanio) or not (0 <= X < tamanio):      #por si le pifias al tablero
             print("Coordenada fuera del tablero. Intenta otra vez.")
             continue
         codTurno:int=(Y*10)+X

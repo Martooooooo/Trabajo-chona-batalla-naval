@@ -66,7 +66,20 @@ def barcosRandom():
 
 
 #juego
-cantidadTurnos:int=int(input("Con cuantos turnos vas a jugar?"))
+def preguntarTurnos():
+    try:
+        tur: int =  int(input("Con cuantos turnos vas a jugar?"))
+        if not (0 < tur < 100):
+            print("Error: Ingrese un número entre 0 y 100")
+            return preguntarTurnos()
+        return tur
+    except ValueError:
+        print("Error:Ingrese un número")
+
+        return preguntarTurnos()
+
+cantidadTurnos : int = preguntarTurnos()
+
 listaDeTurnos:list=[]
 turnosJugados=0
 todo_falso:bool=True

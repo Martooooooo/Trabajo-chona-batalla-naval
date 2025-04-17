@@ -35,7 +35,7 @@ def dibujarTablero():
 
 
 #barcos random
-cantidad:int =int(input("Con Cuantos barcos jugas?"))
+cantidad:int =int(input("Con Cuantos barcos jugas?"))               #https://www.w3schools.com/python/ref_random_randint.asp
 def barcosRandom():
     global BarcosColocados
     BarcosColocados = 0
@@ -68,7 +68,7 @@ listaDeTurnos:list=[]
 turnosJugados=0
 disparosPegados:int=0
 disparosErrados:int=0
-while turnosJugados < cantidadTurnos:
+while turnosJugados < cantidadTurnos:                           #https://chatgpt.com/share/68019038-b230-8008-834d-3f1e10a80132
     try:
         Y:int=int(input("Ingrese cordenada y del disparo"))-1
         X:int=int(input("Ingrese cordenada x del disparo"))-1

@@ -107,7 +107,7 @@ while turnosJugados < cantidadTurnos:
         break
 print(f"Pegaste: {disparosPegados} disparos")
 print(f"Erraste: {disparosErrados} disparos")
-for fila in range(tamanio):
+for fila in range(tamanio):                                #dibuja el tablero con los barcos que te faltaron si te faltaron
     for casilla in range(tamanio):
         if(tablero[fila][casilla]):
             dibujo[fila][casilla]="🚢"
